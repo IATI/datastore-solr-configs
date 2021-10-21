@@ -30,7 +30,7 @@
     for all general text fields, use copyField to copy them to the
     catchall "text" field, and use that for searching.
 -->
-<schema name="activity-config" version="1.6">
+<schema name="transaction-config" version="1.6">
     <!-- attribute "name" is the name of this schema and is only used for display purposes.
        version="x.y" is Solr's version number for the schema syntax and
        semantics.  It should not normally be changed by applications.
@@ -87,24 +87,11 @@
       and back compatibility is not guaranteed.  Names with both leading and
       trailing underscores (e.g. _version_) are reserved.
     -->
-    <!-- In this _default configset, only four fields are pre-declared:
-         id, _version_, and _text_ and _root_. All other fields will be type guessed and added via the
-         "add-unknown-fields-to-the-schema" update request processor chain declared in solrconfig.xml.
-         Note that many dynamic fields are also defined - you can use them to specify a
-         field's type via field naming conventions - see below.
-         WARNING: The _text_ catch-all field will significantly increase your index size.
-         If you don't need it, consider removing it and the corresponding copyField directive.
-    -->
+
+    <!-- id will be the hash of the flattened document before ingested into solr, e.g. activity -->
+
     <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
-    <!-- docValues are enabled by default for long type so we don't need to index the version field  -->
-    <field name="_version_" type="plong" indexed="false" stored="false"/>
-    <!-- If you don't use child/nested documents, then you should remove the next two fields:  -->
-    <!-- for nested documents (minimal; points to root document) -->
-    <field name="_root_" type="string" indexed="true" stored="false" docValues="false" />
-    <!-- for nested documents (relationship tracking) -->
-    <field name="_nest_path_" type="_nest_path_" />
-    <fieldType name="_nest_path_" class="solr.NestPathField" />
-    <field name="_text_" type="text_general" indexed="true" stored="false" multiValued="true"/>
+    
     <!---Activity Core Start-->
     <field name="iati_activities_document_hash" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
     <field name="dataset_iati_version" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
