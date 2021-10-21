@@ -4,22 +4,30 @@
 
 ### Create or Update a configset in Solr
 
+zip all configs
 ```bash
-(cd configsets/<configsetname>/conf && zip -r - *) > <configsetname>.zip
+./zipConfigs.zsh
+```
 
+zip a single config
+```bash
+(cd configsets/activity/conf && zip -r - *) > activityconfigset_YYYY_MM_DD.zip
+```
+
+If the change requires [reindexing](https://solr.apache.org/guide/8_10/reindexing.html), create a new configset in Solr
+```bash
 curl -X PUT --header "Content-Type:application/octet-stream" --data-binary @<configsetname>.zip
-    "http://localhost:8983/api/cluster/configs/<configsetname>"
+    "<solrHost>/api/cluster/configs/<configsetname>"
 ```
 
-### RELOAD Collection
+If the change does not require reindexing, make sure to update the config used by the active Collection (with the correct `configsetname`).
 
-This apply's any updates to the configset to the live collection
-
+Then RELOAD the Collection
+```bash
+curl --location --request GET '<solrHost>/api/solr/admin/collections?action=RELOAD&name=<collectionName>' 
 ```
-GET {{baseURL}}/solr/admin/collections?action=RELOAD&name=<collection_name>
-```
 
-### Create a Collection from a configset
+### Create a New Collection from a configset
 
 ```
 GET {{baseURL}}/solr/admin/collections?action=CREATE&name=<collection_name>&numShards=1&collection.configName=<configset_name>&replicationFactor=3

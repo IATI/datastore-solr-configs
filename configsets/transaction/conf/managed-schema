@@ -30,7 +30,7 @@
     for all general text fields, use copyField to copy them to the
     catchall "text" field, and use that for searching.
 -->
-<schema name="activity-config" version="1.6">
+<schema name="transaction-config" version="1.6">
     <!-- attribute "name" is the name of this schema and is only used for display purposes.
        version="x.y" is Solr's version number for the schema syntax and
        semantics.  It should not normally be changed by applications.
