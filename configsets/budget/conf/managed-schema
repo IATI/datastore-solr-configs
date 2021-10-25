@@ -30,7 +30,7 @@
     for all general text fields, use copyField to copy them to the
     catchall "text" field, and use that for searching.
 -->
-<schema name="budget-config" version="1.6">
+<schema name="activity-config" version="1.6">
     <!-- attribute "name" is the name of this schema and is only used for display purposes.
        version="x.y" is Solr's version number for the schema syntax and
        semantics.  It should not normally be changed by applications.
@@ -99,18 +99,11 @@
     <field name="narrative_xml:lang" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="title" type="text_general" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="description" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="comment" type="text_general" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="reporting_org_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="reporting_org_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="reporting_org_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="reporting_org_secondary_reporter" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="category_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="language_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="document_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="version" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="generated_datetime" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="linked_data_default" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="iati_identifier" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
     <field name="reporting_org" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
     <field name="description_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -149,13 +142,6 @@
     <field name="result" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="crs_add" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
     <field name="fss" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="last_updated_datetime" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="xml:lang" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="default_currency" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="humanitarian" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="hierarchy" type="pint" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="linked_data_uri" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="budget_not_provided" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="participating_org_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="participating_org_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="participating_org_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -180,8 +166,6 @@
     <field name="other_identifier_owner_org_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="other_identifier_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="other_identifier_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="owner_org_narrative" type="iati_narrative" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="owner_org_ref" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
     <field name="sector_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="sector_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="sector_vocabulary_uri" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -197,11 +181,6 @@
     <field name="contact_info_job_title" type="text_general" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="contact_info_mailing_address" type="text_general" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="contact_info_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="organisation" type="text_general" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="department" type="text_general" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="person_name" type="text_general" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="job_title" type="text_general" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="mailing_address" type="text_general" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="default_tied_status_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="humanitarian_scope_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="humanitarian_scope_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -247,26 +226,6 @@
     <field name="transaction_tied_status_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="transaction_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="transaction_humanitarian" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="transaction_type_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="transaction_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="value_currency" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="value_value_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="value" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="provider_org_narrative" type="iati_narrative" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="provider_org_ref" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="provider_org_provider_activity_id" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="provider_org_type" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="receiver_org_narrative" type="iati_narrative" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="receiver_org_ref" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="receiver_org_receiver_activity_id" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="receiver_org_type" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="disbursement_channel_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="flow_type_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="finance_type_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="aid_type_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="aid_type_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="aid_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="tied_status_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
     <field name="location_location_reach_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="location_location_id_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="location_location_id_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -282,20 +241,6 @@
     <field name="location_location_class_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="location_feature_designation_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="location_reach_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="location_id_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="location_id_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="name" type="text_general" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="activity_description" type="text_general" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="administrative_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="administrative_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="administrative_level" type="pint" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="point_pos" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="point_srsName" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="pos" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="exactness_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="location_class_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="feature_designation_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
     <field name="tag_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="tag_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="tag_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -304,9 +249,6 @@
     <field name="country_budget_items_budget_item_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="country_budget_items_budget_item_percentage" type="pdoubles" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="country_budget_items_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="budget_item_description" type="text_general" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="budget_item_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="budget_item_percentage" type="pdoubles" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="related_activity_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="related_activity_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="legacy_data_name" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -351,83 +293,9 @@
     <field name="result_indicator_aggregation_status" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="result_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="result_aggregation_status" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="reference_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="reference_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="reference_vocabulary_uri" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_title" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_description" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_reference_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_reference_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_reference_indicator_uri" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_year" type="pint" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_baseline_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_period_start_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_period_end_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_target_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_target_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_target_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_target_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_target_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_target_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_actual_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_actual_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_actual_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_actual_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_actual_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_period_actual_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_measure" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_ascending" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="indicator_aggregation_status" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="reference_indicator_uri" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_year" type="pint" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="baseline_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_period_start_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_period_end_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_target_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_target_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_target_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_target_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_target_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_target_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_actual_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_actual_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_actual_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_actual_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_actual_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_actual_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="period_start_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="period_end_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="target_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="target_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="target_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="target_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="target_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="target_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="actual_location_ref" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="actual_location" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="actual_dimension" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="actual_comment" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="actual_document_link" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="actual_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="conditions_condition_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="conditions_condition_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="conditions_attached" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="condition_narrative" type="iati_narrative" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="condition_type" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="budget_period_start_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="budget_period_end_iso_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="budget_value_currency" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
@@ -466,46 +334,15 @@
     <field name="crs_add_loan_status_currency" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="crs_add_loan_status_value_date" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="crs_add_channel_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="other_flags_code" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="other_flags_significance" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="loan_terms_repayment_type_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_terms_repayment_plan_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_terms_commitment_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_terms_repayment_first_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_terms_repayment_final_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_terms_rate_1" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_terms_rate_2" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="repayment_type_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="repayment_plan_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="commitment_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="repayment_first_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="repayment_final_date_iso_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_status_interest_received" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_status_principal_outstanding" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_status_principal_arrears" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_status_interest_arrears" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_status_year" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_status_currency" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="loan_status_value_date" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="interest_received" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="principal_outstanding" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="principal_arrears" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="interest_arrears" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"/>
-    <field name="channel_code" type="string" multiValued="false" indexed="true" required="false" stored="true"/>
     <field name="fss_forecast_year" type="pdoubles" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="fss_forecast_currency" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="fss_forecast_value_date" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="fss_extraction_date" type="pdate" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="fss_priority" type="boolean" multiValued="true" indexed="true" required="false" stored="true"/>
     <field name="fss_phaseout_year" type="pdoubles" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="forecast_year" type="pdoubles" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="forecast_currency" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="forecast_value_date" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="dimension_name" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
-    <field name="dimension_value" type="string" multiValued="true" indexed="true" required="false" stored="true"/>
     <!---Activity Core End-->
     <!-- IATI Dynamic Field Definitions -->
-    <dynamicField name="*_xml:lang" type="string" indexed="true" stored="true"/>
+    <dynamicField name="*_xml:lang" type="string" multiValued="true" indexed="true" stored="true"/>
     <!-- This can be enabled, in case the client does not know what fields may be searched. It isn't enabled by default
          because it's very expensive to index everything twice. -->
     <!-- <copyField source="*" dest="_text_"/> -->
