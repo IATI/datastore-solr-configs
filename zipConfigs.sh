@@ -3,7 +3,7 @@
 for COLPATH in configsets/* ; do
     echo "zipping: "$COLPATH
     COLLECTION=$(basename "$COLPATH")
-    DATE=$(date "+"%Y_%m_%d"")
-    FILENAME="${COLLECTION}configset_${DATE}.zip"
+    read -p 'Configset version number: ' NUM
+    FILENAME="${COLLECTION}_configset_${NUM}.zip"
     (cd $COLPATH/conf && zip -r - *) > $FILENAME 
 done
