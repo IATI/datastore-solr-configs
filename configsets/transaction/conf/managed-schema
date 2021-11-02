@@ -170,6 +170,7 @@
     <field name="location_administrative_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_administrative_level" type="pint" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_point_srsName" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
+    <field name="location_point_pos" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_exactness_code" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_location_class_code" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_feature_designation_code" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
@@ -385,6 +386,11 @@
     <field name="crs_add_loan_status_year" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"  />
     <field name="crs_add_loan_status_currency" type="string" multiValued="false" indexed="true" required="false" stored="true"  />
     <field name="crs_add_loan_status_value_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"  />
+    <field name="crs_add_loan_status_interest_received" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"  />
+    <field name="crs_add_loan_status_principal_outstanding" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"  />
+    <field name="crs_add_loan_status_principal_arrears" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"  />
+    <field name="crs_add_loan_status_interest_arrears" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"  />
+    <field name="crs_add_channel_code" type="string" multiValued="false" indexed="true" required="false" stored="true"  />
     <field name="fss_extraction_date" type="pdate" multiValued="false" indexed="true" required="false" stored="true"  />
     <field name="fss_priority" type="boolean" multiValued="false" indexed="true" required="false" stored="true"  />
     <field name="fss_phaseout_year" type="pdoubles" multiValued="false" indexed="true" required="false" stored="true"  />
