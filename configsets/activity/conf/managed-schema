@@ -172,7 +172,7 @@
     <field name="location_activity_description_narrative_xml_lang" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_administrative_code" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_administrative_vocabulary" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
-    <field name="location_administrative_level" type="pint" multiValued="true" indexed="true" required="false" stored="true"  />
+    <field name="location_administrative_level" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_point_srsName" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_point_pos" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
     <field name="location_exactness_code" type="string" multiValued="true" indexed="true" required="false" stored="true"  />
