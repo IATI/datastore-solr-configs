@@ -92,7 +92,7 @@
     <!-- docValues are enabled by default for long type so we don't need to index the version field  -->
     <field name="_version_" type="plong" indexed="false" stored="false"/>
     <!---Activity Core Start-->
-    <field name="iati_activities_document_hash" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+    <field name="iati_activities_document_id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
     <field name="dataset_version" type="string" multiValued="false" indexed="true" required="false" stored="true"  />
     <field name="dataset_generated_datetime" type="pdate" multiValued="false" indexed="true" required="false" stored="true"  />
     <field name="dataset_linked_data_default" type="string" multiValued="false" indexed="true" required="false" stored="true"  />
