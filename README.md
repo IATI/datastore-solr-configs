@@ -11,7 +11,7 @@ zip all configs
 
 zip a single config
 ```bash
-(cd configsets/activity/conf && zip -r - *) > activityconfigset_YYYY_MM_DD.zip
+(cd configsets/activity/conf && zip -r - *) > activity_configset_V.zip
 ```
 
 If the change requires [reindexing](https://solr.apache.org/guide/8_10/reindexing.html), create a new configset in Solr
