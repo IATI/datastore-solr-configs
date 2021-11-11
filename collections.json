@@ -1,0 +1,11 @@
+[
+  {
+    "collectionName": "activity"
+  },
+  {
+    "collectionName": "budget"
+  },
+  {
+    "collectionName": "transaction"
+  }
+]
