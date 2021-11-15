@@ -1,6 +1,22 @@
 # datastore-solr-configs
 
-## Manual 
+## Convert Schema to Solrconfig
+
+### Create a virtual environment (recommended)
+    
+```bash
+    cd schema-converter
+    python3 -m venv pyenv
+
+    # Activate the virtual environment if you created one
+    # This must repeated each time you open a new shell
+    source pyenv/bin/activate
+
+    # Install python requirements
+    pip install -r IATIStandardSSOT/requirements.txt
+```
+
+## Sync Configset to Solr 
 
 ### Create or Update a configset in Solr
 
