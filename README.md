@@ -1,20 +1,27 @@
 # datastore-solr-configs
 
-## Convert Schema to Solrconfig
+git clone <url> --recurse-submodules
 
-### Create a virtual environment (recommended)
-    
+## Convert Schema to Solrconfig / Make updates to a Config
+
+Edit templates if necessary:
+
+- Solr Schema - `schema-converter/managed-schema-template.xml`
+- Solr Config - `schema-converter/solrconfig-template.xml`
+
+Run schema converter:
+
 ```bash
-    cd schema-converter
-    python3 -m venv pyenv
-
-    # Activate the virtual environment if you created one
-    # This must repeated each time you open a new shell
-    source pyenv/bin/activate
-
-    # Install python requirements
-    pip install -r IATIStandardSSOT/requirements.txt
+cd schema-converter
+./convertSchema.sh
 ```
+
+This will make updates to:
+
+- `configsets/{collection}/conf/managed-schema`
+- `configsets/{collection}/conf/solrconfig.xml`
+
+Diff updates, commit to git
 
 ## Sync Configset to Solr 
 
