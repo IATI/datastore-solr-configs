@@ -68,6 +68,10 @@
        The example below can be used to load a solr-contrib along
        with their external dependencies.
     -->
+    <lib dir="${solr.install.dir:../../../..}/contrib/velocity/lib" regex=".*\.jar" />
+  <!-- browse-resources must come before solr-velocity JAR in order to override localized resources -->
+    <lib path="${solr.install.dir:../../../..}/example/files/browse-resources"/>
+    <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-velocity-\d.*\.jar" />
     <!-- <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-ltr-\d.*\.jar" /> -->
     <!-- an exact 'path' can be used instead of a 'dir' to specify a
        specific jar file.  This will cause a serious error to be logged
@@ -816,8 +820,10 @@
       -->
 
        <lst name="invariants">
-           <str name="fl">iati_xml:[xml]</str>
-           <str name="wt">xml</str>
+           <str name="fl">iati_xml</str>
+           <str name="wt">velocity</str>
+           <str name="v.template">activities</str>
+           <str name="v.contentType">text/xml; charset=UTF-8</str>
        </lst>
 
 
@@ -1175,6 +1181,18 @@
      -->
     <!-- <str name="content-type">text/plain; charset=UTF-8</str> -->
   
+</queryResponseWriter>
+
+<queryResponseWriter name="velocity" class="solr.VelocityResponseWriter">
+  <str name="template.base.dir">velocity</str>
+
+
+<!--
+  <str name="init.properties.file">velocity-init.properties</str>
+  <lst name="tools">
+    <str name="mytool">com.example.MyCustomTool</str>
+  </lst>
+-->
 </queryResponseWriter>
 <!-- Query Parsers
 
