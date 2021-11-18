@@ -1,0 +1,1 @@
+${doc.getFieldValues('iati_xml')[0]}
