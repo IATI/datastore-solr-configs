@@ -1,11 +1,9 @@
 #!/bin/bash
 
-git submodule init
-git submodule update
+git submodule update --init --recursive
+git submodule update --remote
 
 cd IATIStandardSSOT
-git submodule init
-git submodule update
 
 if [ ! -d pyenv ]; then
   python3 -m venv pyenv

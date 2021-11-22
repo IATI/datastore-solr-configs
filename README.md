@@ -2,6 +2,8 @@
 
 git clone <url> --recurse-submodules
 
+https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
 ## Convert Schema to Solrconfig / Make updates to a Config
 
 Edit templates if necessary:
