@@ -290,7 +290,7 @@
       -->
         <autoCommit>
             <maxTime>15000</maxTime>
-            <openSearcher>true</openSearcher>
+            <openSearcher>false</openSearcher>
         </autoCommit>
         <!-- softAutoCommit is like autoCommit except it causes a
          'soft' commit which only ensures that changes are visible
@@ -298,7 +298,7 @@
          faster and more near-realtime friendly than a hard commit.
       -->
         <autoSoftCommit>
-            <maxTime>${solr.autoSoftCommit.maxTime:-1}</maxTime>
+            <maxTime>600000</maxTime>
         </autoSoftCommit>
         <!-- Update Related Event Listeners
 
