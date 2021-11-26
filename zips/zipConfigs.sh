@@ -1,6 +1,6 @@
 #!/bin/bash
 # zip up all the configsets to prepare them to be POST'd to solr
-for COLPATH in configsets/* ; do
+for COLPATH in ../configsets/* ; do
     echo "zipping: "$COLPATH
     COLLECTION=$(basename "$COLPATH")
     read -p 'Configset version number: ' NUM

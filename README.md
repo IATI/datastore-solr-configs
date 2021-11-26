@@ -29,12 +29,20 @@ Diff updates, commit to git
 
 ## Sync Configset to Solr
 
+### Versioning
+
+If the change requires a Re-Index, increment the version by 1. (e.g. {collection}_configset_8 to {collection}_configset_9)
+
+If the change does not require a Re-Index and you would like to load into the existing Configset Used by your active collections, add a -N to the version. (e.g. {collection}_configset_8-1, {collection}_configset_8-2)
+
 ### Create or Update a configset in Solr
 
 zip all configs
 
 ```bash
+cd zips
 ./zipConfigs.zsh
+# provide version number when prompted
 ```
 
 zip a single config
