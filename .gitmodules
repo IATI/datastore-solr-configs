@@ -1,4 +1,4 @@
 [submodule "schema-converter/IATIStandardSSOT"]
 	path = schema-converter/IATIStandardSSOT
 	url = git@github.com:IATI/IATI-Standard-SSOT.git
-	branch = solr-config-generation
+	branch = version-2.03
