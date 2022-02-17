@@ -91,6 +91,9 @@
     <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" />
     <!-- docValues are enabled by default for long type so we don't need to index the version field  -->
     <field name="_version_" type="plong" indexed="false" stored="false"/>
+
+    <!-- field to hold all _narrative elements for simple search, see copyField below -->
+    <field name="iati_text" type="text_general" indexed="true" stored="false" multiValued="true" />
    
     <field name="iati_activities_document_id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
     <!--- Dynamic Generation Schema Start-->
@@ -142,6 +145,10 @@
        or to add multiple fields to the same field for easier/faster searching.
     <copyField source="sourceFieldName" dest="destinationFieldName"/>
     -->
+
+    <!-- Copy all narrative elements for simple search -->
+    <copyField source="*_narrative" dest="iati_text"/>
+
     <!-- field type definitions. The "name" attribute is
        just a label to be used by field definitions.  The "class"
        attribute and any other attributes determine the real
