@@ -762,7 +762,7 @@
     <!-- use eDisMax query parser -->
     <str name="defType">edismax</str>
 
-    #SEARCHDEFAULTS#
+    #PARTIALSEARCHDEFAULTS#
     <!-- Change from JSON to XML format (the default prior to Solr 7.0)
       <str name="wt">xml</str>
      -->
