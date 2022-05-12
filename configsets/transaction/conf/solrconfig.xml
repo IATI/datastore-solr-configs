@@ -285,8 +285,10 @@
          have some sort of hard autoCommit to limit the log size.
       -->
         <autoCommit>
-            <maxTime>15000</maxTime>
-            <openSearcher>true</openSearcher>
+            <maxTime>${solr.autoCommit.maxTime:15000}</maxTime>
+            <maxDocs>${solr.autoCommit.maxDocs:-1}</maxDocs>
+            <maxSize>${solr.autoCommit.maxSize:-1}</maxSize>
+            <openSearcher>${solr.autoCommit.openSearcher:true}</openSearcher>
         </autoCommit>
         <!-- softAutoCommit is like autoCommit except it causes a
          'soft' commit which only ensures that changes are visible
