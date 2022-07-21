@@ -92,6 +92,9 @@
     <!-- docValues are enabled by default for long type so we don't need to index the version field  -->
     <field name="_version_" type="plong" indexed="false" stored="false"/>
 
+    <!-- add timestamp of indexing time -->
+    <field name="indexed_datetime" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
+
     <!-- field to hold all _narrative elements for simple search, see copyField below -->
     <field name="iati_text" type="text_general" indexed="true" stored="false" multiValued="true" />
    

@@ -25,6 +25,14 @@ This will make updates to:
 - `configsets/{collection}/conf/solrconfig.xml`
   - Replacing: `#SEARCHDEFAULTS#`
 
+Then zip all configs
+
+```bash
+cd zips
+./zipConfigs.sh
+# provide version number when prompted
+```
+
 Diff updates, commit to git
 
 ## Sync Configset to Solr
@@ -37,15 +45,7 @@ If the change does not require a Re-Index and you would like to load into the ex
 
 ### Create or Update a configset in Solr
 
-zip all configs
-
-```bash
-cd zips
-./zipConfigs.zsh
-# provide version number when prompted
-```
-
-zip a single config
+Use zips from above, or zip a single config for testing
 
 ```bash
 (cd configsets/activity/conf && zip -r - *) > activity_configset_V.zip
