@@ -1254,4 +1254,7 @@
             <filter class="solr.LowerCaseFilterFactory"/>
         </analyzer>
     </fieldType>
+    <!-- Geospatial data -->
+    <fieldType name="location_point" class="solr.LatLonPointSpatialField" docValues="true"  multiValued="true"/>
+    <field name="location_point_latlon" type="location_point" indexed="true" required="false" stored="true"/>
 </schema>
