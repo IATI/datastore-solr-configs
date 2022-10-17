@@ -797,7 +797,7 @@
          unless you are sure you always want it.
       -->
        <lst name="invariants">
-           <str name="fl">iati_xml</str>
+           <str name="fl">iati_xml,datetime:[value v=NOW t=date]</str>
            <str name="wt">xslt</str>
            <str name="tr">iati_xml.xsl</str>
        </lst>
