@@ -1209,16 +1209,6 @@
 </queryResponseWriter>
 
 <!-- xslt response writer for iati_xml response -->
- <!-- 
-     v8 class='solr.XSLTResponseWriter' 
-     v9 class='solr.scripting.xslt.XSLTResponseWriter' 
- -->
- <queryResponseWriter name="xslt"
-                      class="${solrxsltloc:solr.XSLTResponseWriter}">
-   <int name="xsltCacheLifetimeSeconds">3600</int>
- </queryResponseWriter>
-
-<!-- xslt response writer for iati_xml response -->
 <!-- 
     v8 class='solr.XSLTResponseWriter' 
     v9 class='solr.scripting.xslt.XSLTResponseWriter' 
