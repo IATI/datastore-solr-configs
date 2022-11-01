@@ -1,1 +1,0 @@
-<iati-activities generated-datetime="$date.format("yyyy-MM-dd'T'hh:mm:ss'Z'", $date.systemDate)" version="2.03">#foreach($doc in $response.results) #parse("activity.vm") #end</iati-activities>
