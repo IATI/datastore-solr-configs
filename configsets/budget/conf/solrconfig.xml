@@ -15,14 +15,15 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
+
 <!--
      For more details about configurations options that may appear in
-     this file, see https://solr.apache.org/guide/configuring-solrconfig-xml.html.
+     this file, see https://solr.apache.org/guide/solr/latest/configuration-guide/configuring-solrconfig-xml.html.
 -->
 <config>
   <!-- In all configuration below, a prefix of "solr." for class names
-        is an alias that causes solr to search appropriate packages,
-        including org.apache.solr.(search|update|request|core|analysis)
+       is an alias that causes solr to search appropriate packages,
+       including org.apache.solr.(search|update|request|core|analysis)
 
         You may also specify a fully qualified Java classname if you
         have your own custom plugins.
@@ -34,8 +35,9 @@
        that you fully re-index after changing this setting as it can
        affect both how text is indexed and queried.
   -->
-  <luceneMatchVersion>9.0</luceneMatchVersion>
-    <!-- <lib/> directives can be used to instruct Solr to load any Jars
+  <luceneMatchVersion>9.3</luceneMatchVersion>
+
+  <!-- <lib/> directives can be used to instruct Solr to load any Jars
        identified and use them to resolve any "plugins" specified in
        your solrconfig.xml or schema.xml (ie: Analyzers, Request
        Handlers, etc...).
@@ -260,7 +262,7 @@
          Instead of enabling autoCommit, consider using "commitWithin"
          when adding documents.
 
-         https://solr.apache.org/guide/indexing-with-update-handlers.html
+         https://solr.apache.org/guide/solr/latest/indexing-guide/indexing-with-update-handlers.html
 
          maxDocs - Maximum number of documents to add since the last
                    commit before automatically triggering a new commit.
@@ -418,7 +420,7 @@
     <!--
        <fieldValueCache size="512"
                         autowarmCount="128"
-                        showItems="32" />
+                        />
       -->
 
     <!-- Feature Values Cache
@@ -429,7 +431,7 @@
          when running solr to run with ltr enabled:
            -Dsolr.ltr.enabled=true
 
-         https://solr.apache.org/guide/learning-to-rank.html
+         https://solr.apache.org/guide/solr/latest/query-guide/learning-to-rank.html
       -->
     <cache enable="${solr.ltr.enabled:false}" name="QUERY_DOC_FV"
            class="solr.CaffeineCache"
@@ -684,7 +686,7 @@
 </requestDispatcher>
 <!-- Request Handlers
 
-       https://solr.apache.org/guide/requesthandlers-and-searchcomponents-in-solrconfig.html
+       https://solr.apache.org/guide/solr/latest/configuration-guide/requesthandlers-searchcomponents.html
 
        Incoming queries will be dispatched to a specific handler by name based on the path specified in the request.
 
@@ -834,7 +836,7 @@
 
   <!-- Solr Cell Update Request Handler
 
-       https://solr.apache.org/guide/indexing-with-tika.html
+       https://solr.apache.org/guide/solr/latest/indexing-guide/indexing-with-tika.html
 
     -->
   <requestHandler name="/update/extract"
@@ -850,6 +852,7 @@
       <str name="fmap.div">ignored_</str>
     </lst>
   </requestHandler>
+
 
 <!-- Spell Check
 
@@ -922,7 +925,7 @@
        IN OTHER WORDS, THERE IS REALLY GOOD CHANCE THE SETUP BELOW IS
        NOT WHAT YOU WANT FOR YOUR PRODUCTION SYSTEM!
 
-       See https://solr.apache.org/guide/spell-checking.html for details
+       See https://solr.apache.org/guide/solr/latest/query-guide/spell-checking.html for details
        on the request parameters.
     -->
 <requestHandler name="/spell" class="solr.SearchHandler" startup="lazy">
@@ -948,9 +951,172 @@
     </arr>
 </requestHandler>
 
-<!-- Highlighting Component
+<!-- The SuggestComponent in Solr provides users with automatic suggestions for query terms.
+       You can use this to implement a powerful auto-suggest feature in your search application.
+       As with the rest of this solrconfig.xml file, the configuration of this component is purely
+       an example that applies specifically to this configset and example documents.
 
-       https://solr.apache.org/guide/highlighting.html
+       See: https://solr.apache.org/guide/solr/latest/query-guide/suggester.html
+    -->
+  <searchComponent name="suggest" class="solr.SuggestComponent">
+    <lst name="suggester">
+      <str name="name">mySuggester</str>
+      <str name="lookupImpl">FuzzyLookupFactory</str>
+      <str name="dictionaryImpl">DocumentDictionaryFactory</str>
+      <str name="field">cat</str>
+      <str name="weightField">price</str>
+      <str name="suggestAnalyzerFieldType">string</str>
+      <str name="buildOnStartup">false</str>
+    </lst>
+  </searchComponent>
+
+  <requestHandler name="/suggest" class="solr.SearchHandler"
+                  startup="lazy" >
+    <lst name="defaults">
+      <str name="suggest">true</str>
+      <str name="suggest.count">10</str>
+    </lst>
+    <arr name="components">
+      <str>suggest</str>
+    </arr>
+  </requestHandler>
+
+
+  <!-- Term Vector Component
+
+       https://solr.apache.org/guide/solr/latest/query-guide/term-vector-component.html
+    -->
+  <searchComponent name="tvComponent" class="solr.TermVectorComponent"/>
+
+  <!-- A request handler for demonstrating the term vector component
+
+       This is purely as an example.
+
+       In reality you will likely want to add the component to your
+       already specified request handlers.
+    -->
+  <requestHandler name="/tvrh" class="solr.SearchHandler" startup="lazy">
+    <lst name="defaults">
+      <bool name="tv">true</bool>
+    </lst>
+    <arr name="last-components">
+      <str>tvComponent</str>
+    </arr>
+  </requestHandler>
+
+  <!-- Search results clustering component
+
+       You'll need to set the solr.clustering.enabled system property
+       when running solr to run with clustering enabled:
+       -Dsolr.clustering.enabled=true
+
+       https://solr.apache.org/guide/solr/latest/query-guide/result-clustering.html
+    -->
+  <searchComponent name="clustering"
+                   enable="${solr.clustering.enabled:false}"
+                   class="solr.clustering.ClusteringComponent" >
+    <!--
+    Declaration of "engines" (named sets of configuration parameters).
+
+    Various algorithms are available (names are loaded via service provider
+    extension point). The open source algorithms from Carrot2.org project:
+      * Lingo
+      * STC
+      * Bisecting K-Means
+
+    Commercial algorithm Lingo3G from Carrot Search (needs to be installed separately):
+      * Lingo3G
+    -->
+
+    <lst name="engine">
+      <str name="name">lingo3g</str>
+      <bool name="optional">true</bool>
+      <str name="clustering.algorithm">Lingo3G</str>
+      <str name="clustering.fields">name, features</str>
+      <bool name="clustering.includeOtherTopics">true</bool>
+      <str name="clustering.language">English</str>
+    </lst>
+
+    <lst name="engine">
+      <str name="name">lingo</str>
+      <str name="clustering.algorithm">Lingo</str>
+      <str name="clustering.fields">name, features</str>
+      <bool name="clustering.includeOtherTopics">true</bool>
+      <str name="clustering.language">English</str>
+    </lst>
+
+    <lst name="engine">
+      <str name="name">stc</str>
+      <str name="clustering.algorithm">STC</str>
+      <str name="clustering.fields">name, features</str>
+      <bool name="clustering.includeOtherTopics">true</bool>
+      <str name="clustering.language">English</str>
+    </lst>
+
+    <lst name="engine">
+      <str name="name">kmeans</str>
+      <str name="clustering.algorithm">Bisecting K-Means</str>
+      <str name="clustering.fields">name, features</str>
+      <bool name="clustering.includeOtherTopics">true</bool>
+      <str name="clustering.language">English</str>
+    </lst>
+  </searchComponent>
+
+  <!-- A request handler for demonstrating the clustering component.
+       This is meant as an example - in reality you will likely want
+       to add the clustering component to your default request handler.
+    -->
+  <requestHandler name="/clustering"
+                  startup="lazy"
+                  enable="${solr.clustering.enabled:false}"
+                  class="solr.SearchHandler">
+    <lst name="defaults">
+      <!-- Enable clustering component by default. -->
+      <bool name="clustering">true</bool>
+
+      <str name="defType">edismax</str>
+      <str name="qf">
+        text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
+      </str>
+      <str name="q.alt">*:*</str>
+      <str name="rows">100</str>
+      <str name="fl">*,score</str>
+    </lst>
+
+    <!-- Append the clustering component at the end of the search handler's list of components. -->
+    <arr name="last-components">
+      <str>clustering</str>
+    </arr>
+  </requestHandler>
+
+
+  <!-- Query Elevation Component
+
+       https://solr.apache.org/guide/solr/latest/query-guide/query-elevation-component.html
+
+       a search component that enables you to configure the top
+       results for a given query regardless of the normal lucene
+       scoring.
+    -->
+  <searchComponent name="elevator" class="solr.QueryElevationComponent" >
+    <!-- pick a fieldType to analyze queries -->
+    <str name="queryFieldType">string</str>
+    <str name="config-file">elevate.xml</str>
+  </searchComponent>
+
+  <!-- A request handler for demonstrating the elevator component -->
+  <requestHandler name="/elevate" class="solr.SearchHandler" startup="lazy">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+    </lst>
+    <arr name="last-components">
+      <str>elevator</str>
+    </arr>
+  </requestHandler>
+
+  <!-- Highlighting Component
+
+       https://solr.apache.org/guide/solr/latest/query-guide/highlighting.html
     -->
   <searchComponent class="solr.HighlightComponent" name="highlight">
     <!-- note: the hl.method=unified highlighter is not configured here; it's completely configured
@@ -1051,7 +1217,7 @@ via parameters.  The below configuration supports hl.method=original and fastVec
 </searchComponent>
 
   <!-- Update Request Processors
-       https://solr.apache.org/guide/update-request-processors.html
+       https://solr.apache.org/guide/solr/latest/configuration-guide/update-request-processors.html
 
        Chains or individual Update Request Processor Factories can be declared and referenced
        to preprocess documents sent to Update Request Handlers.
@@ -1087,7 +1253,7 @@ via parameters.  The below configuration supports hl.method=original and fastVec
        making this example suitable for detecting languages form full-text
        rich documents injected via ExtractingRequestHandler.
 
-       See more about langId at https://solr.apache.org/guide/language-detection.html
+       See more about langId at https://solr.apache.org/guide/solr/latest/indexing-guide/language-detection.html
     -->
     <!--
      <updateRequestProcessorChain name="langid">
@@ -1106,7 +1272,7 @@ via parameters.  The below configuration supports hl.method=original and fastVec
     This example hooks in an update processor implemented using JavaScript and demonstrates
     how to pass in custom parameters.
 
-    See more about script update processor at https://solr.apache.org/guide/script-update-processor.html
+    See more about script update processor at https://solr.apache.org/guide/solr/latest/configuration-guide/script-update-processor.html
   -->
   <!--
   <updateRequestProcessorChain name="script">
@@ -1122,7 +1288,7 @@ via parameters.  The below configuration supports hl.method=original and fastVec
 
   <!-- Response Writers
 
-       https://solr.apache.org/guide/response-writers.html
+       https://solr.apache.org/guide/solr/latest/query-guide/response-writers.html
 
        Request responses will be written using the writer specified by
        the 'wt' request parameter matching the name of a registered
@@ -1151,11 +1317,11 @@ via parameters.  The below configuration supports hl.method=original and fastVec
        in Solr's conf/xslt directory.  Changes to xslt files are checked
        every xsltCacheLifetimeSeconds.  This is part of the Scripting module.
 
-       See more about this response writer at https://solr.apache.org/guide/response-writers.html#xslt-response-writer
+       See more about this response writer at https://solr.apache.org/guide/solr/latest/query-guide/response-writers.html#xslt-response-writer
   -->
 <!-- Query Parsers
 
-       https://solr.apache.org/guide/query-syntax-and-parsing.html
+       https://solr.apache.org/guide/solr/latest/query-guide/query-syntax-and-parsers.html
 
        Multiple QParserPlugins can be registered by name, and then
        used in either the "defType" param for the QueryComponent (used
@@ -1168,7 +1334,7 @@ via parameters.  The below configuration supports hl.method=original and fastVec
 
   <!-- Function Parsers
 
-       https://solr.apache.org/guide/function-queries.html
+       https://solr.apache.org/guide/solr/latest/query-guide/function-queries.html
 
        Multiple ValueSourceParsers can be registered by name, and then
        used as function names when using the "func" QParser.
@@ -1185,14 +1351,14 @@ via parameters.  The below configuration supports hl.method=original and fastVec
         when running solr to run with ltr enabled:
           -Dsolr.ltr.enabled=true
 
-        https://solr.apache.org/guide/learning-to-rank.html
+        https://solr.apache.org/guide/solr/latest/query-guide/learning-to-rank.html
 
         Query parser is used to rerank top docs with a provided model
     -->
   <queryParser enable="${solr.ltr.enabled:false}" name="ltr" class="org.apache.solr.ltr.search.LTRQParserPlugin"/>
 
   <!-- Document Transformers
-       https://solr.apache.org/guide/document-transformers.html
+       https://solr.apache.org/guide/solr/latest/query-guide/document-transformers.html
     -->
   <!--
      Could be something like:
@@ -1226,7 +1392,7 @@ via parameters.  The below configuration supports hl.method=original and fastVec
       when running solr to run with ltr enabled:
         -Dsolr.ltr.enabled=true
 
-      https://solr.apache.org/guide/learning-to-rank.html
+      https://solr.apache.org/guide/solr/latest/query-guide/learning-to-rank.html
       -->
     <transformer enable="${solr.ltr.enabled:false}" name="features" class="org.apache.solr.ltr.response.transform.LTRFeatureLoggerTransformerFactory">
       <str name="fvCacheName">QUERY_DOC_FV</str>
