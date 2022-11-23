@@ -783,6 +783,31 @@
     <lst name="defaults">
         <str name="echoParams">none</str>
         <int name="rows">10</int>
+        <bool name="preferLocalShards">false</bool>
+    </lst>
+    <!-- "invariants" are a way of letting the Solr maintainer lock down
+         the options available to Solr clients.  Any params values
+         specified here are used regardless of what values may be specified
+         in either the query, the "defaults", or the "appends" params.
+         
+         NOTE: there is *absolutely* nothing a client can do to prevent these
+         "invariants" values from being used, so don't use this mechanism
+         unless you are sure you always want it.
+      -->
+       <lst name="invariants">
+            <str name="fl">iati_xml,datetime:[value v=NOW t=date]</str>
+            <str name="wt">xslt</str>
+            <str name="tr">iati_xml.xsl</str>
+        </lst>
+</requestHandler>
+
+<requestHandler name="/iati_json" class="solr.SearchHandler">
+    <!-- default values for query parameters can be specified, these
+         will be overridden by parameters in the request
+      -->
+    <lst name="defaults">
+        <str name="echoParams">none</str>
+        <int name="rows">10</int>
         <!-- Controls the distribution of a query to shards other than itself.
             Consider making 'preferLocalShards' true when:
               1) maxShardsPerNode > 1
@@ -816,9 +841,8 @@
          unless you are sure you always want it.
       -->
        <lst name="invariants">
-           <str name="fl">iati_xml,datetime:[value v=NOW t=date]</str>
-           <str name="wt">xslt</str>
-           <str name="tr">iati_xml.xsl</str>
+           <str name="fl">iati_json:[json]</str>
+           <str name="wt">json</str>
        </lst>
  
 </requestHandler>
@@ -1369,6 +1393,10 @@ via parameters.  The below configuration supports hl.method=original and fastVec
 <!-- 
     v8 class='solr.XSLTResponseWriter' 
     v9 class='solr.scripting.xslt.XSLTResponseWriter' 
+
+    v9 Must start Solr with the following SOLR_OPTS to enable the scripting module and point to the correct class
+    -Dsolr.modules=scripting
+    -Dsolrxsltloc=solr.scripting.xslt.XSLTResponseWriter
 -->
 <queryResponseWriter name="xslt"
                      startup="lazy"

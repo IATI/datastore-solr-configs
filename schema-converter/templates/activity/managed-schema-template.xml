@@ -117,6 +117,9 @@
     <!-- iati_xml field -->
     <field name="iati_xml" type="string_large" multiValued="false" indexed="false" stored="true" large="true"/>
 
+    <!-- iati_json field -->
+    <field name="iati_json" type="string_large" multiValued="false" indexed="false" stored="true" large="true"/>
+
     <!-- field to hold all _narrative elements for simple search, see copyField below -->
     <field name="iati_text" type="text_general" indexed="true" stored="false" multiValued="true" />
     
