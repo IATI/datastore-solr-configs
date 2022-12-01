@@ -96,10 +96,13 @@
     <field name="indexed_datetime" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
 
     <!-- iati_xml field -->
-    <field name="iati_xml" type="string_large" multiValued="false" indexed="false" stored="true" large="true"/>
+    <field name="iati_xml" type="string_large" multiValued="false" indexed="false" stored="true" docValues="false"/>
 
     <!-- iati_json field -->
-    <field name="iati_json" type="string_large" multiValued="false" indexed="false" stored="true" large="true"/>
+    <field name="iati_json" type="string_large" multiValued="false" indexed="false" stored="true" docValues="false"/>
+
+    <!-- Geospatial data -->
+    <field name="location_point_latlon" type="location_point" indexed="true" required="false" stored="true"/>
 
     <!-- field to hold all _narrative elements for simple search, see copyField below -->
     <field name="iati_text" type="text_general" indexed="true" stored="false" multiValued="true" />
@@ -181,11 +184,10 @@
     -->
 
     <!-- IATI Custom Field Types START -->
-    <fieldtype name="string_large" class="solr.TextField" sortMissingLast="true" omitNorms="true">
-        <analyzer>
-          <tokenizer class="solr.KeywordTokenizerFactory"/>
-        </analyzer>
-    </fieldtype>
+    <fieldtype name="string_large" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+
+    <!-- Geospatial data -->
+    <fieldType name="location_point" class="solr.LatLonPointSpatialField" docValues="true"  multiValued="true"/>
     <!-- IATI Custom Field Types END -->
 
     <!-- The StrField type is not analyzed, but indexed/stored verbatim. -->
@@ -931,31 +933,4 @@
     <!--
      <similarity class="com.example.solr.CustomSimilarityFactory"><str name="paramkey">param value</str></similarity>
     -->
-    <!-- IATI Narrative -->
-    <fieldType name="iati_narrative" class="solr.SortableTextField" positionIncrementGap="100" multiValued="true">
-        <analyzer type="index">
-            <tokenizer class="solr.StandardTokenizerFactory"/>
-            <filter class="solr.NGramFilterFactory" minGramSize="2" maxGramSize="100"/>
-            <filter class="solr.LowerCaseFilterFactory"/>
-        </analyzer>
-        <analyzer type="query">
-            <tokenizer class="solr.StandardTokenizerFactory"/>
-            <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" />
-            <filter class="solr.SynonymGraphFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
-            <filter class="solr.LowerCaseFilterFactory"/>
-        </analyzer>
-    </fieldType>
-    <fieldType name="non_case_sensitive" class="solr.TextField">
-        <analyzer type="index">
-            <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-            <filter class="solr.LowerCaseFilterFactory"/>
-        </analyzer>
-        <analyzer type="query">
-            <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-            <filter class="solr.LowerCaseFilterFactory"/>
-        </analyzer>
-    </fieldType>
-    <!-- Geospatial data -->
-    <fieldType name="location_point" class="solr.LatLonPointSpatialField" docValues="true"  multiValued="true"/>
-    <field name="location_point_latlon" type="location_point" indexed="true" required="false" stored="true"/>
 </schema>
