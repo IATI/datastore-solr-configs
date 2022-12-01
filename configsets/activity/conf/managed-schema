@@ -468,9 +468,6 @@
     <dynamicField name="*_p"  type="location" indexed="true" stored="true"/>
     <dynamicField name="*_srpt"  type="location_rpt" indexed="true" stored="true"/>
     <!-- payloaded dynamic fields -->
-    <dynamicField name="*_dpf" type="delimited_payloads_float" indexed="true"  stored="true"/>
-    <dynamicField name="*_dpi" type="delimited_payloads_int" indexed="true"  stored="true"/>
-    <dynamicField name="*_dps" type="delimited_payloads_string" indexed="true"  stored="true"/>
     <dynamicField name="attr_*" type="text_general" indexed="true" stored="true" multiValued="true"/>
     <!-- Fully generic dynamic field -->
     <dynamicField name="*" type="text_general" multiValued="true" indexed="false" stored="true"/>
