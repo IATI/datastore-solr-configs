@@ -96,10 +96,10 @@
     <field name="indexed_datetime" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
 
     <!-- iati_xml field -->
-    <field name="iati_xml" type="string_large" multiValued="false" indexed="false" stored="true" docValues="false"/>
+    <field name="iati_xml" type="string_large" multiValued="false" />
 
     <!-- iati_json field -->
-    <field name="iati_json" type="string_large" multiValued="false" indexed="false" stored="true" docValues="false"/>
+    <field name="iati_json" type="string_large" multiValued="false" />
 
     <!-- Geospatial data -->
     <field name="location_point_latlon" type="location_point" indexed="true" required="false" stored="true"/>
@@ -184,7 +184,7 @@
     -->
 
     <!-- IATI Custom Field Types START -->
-    <fieldtype name="string_large" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
+    <fieldtype name="string_large" class="solr.StrField" indexed="false" stored="true" docValues="false" sortMissingLast="true" omitNorms="true"/>
 
     <!-- Geospatial data -->
     <fieldType name="location_point" class="solr.LatLonPointSpatialField" docValues="true"  multiValued="true"/>
