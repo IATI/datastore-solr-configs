@@ -73,6 +73,8 @@ If the change requires [reindexing](https://solr.apache.org/guide/solr/latest/in
 If the change does not require reindexing, follow the guide on the [wiki](https://github.com/IATI/IATI-Internal-Wiki/blob/main/IATI-Unified-Infra/Solr.md#updating-solr-config-in-place-no-re-indexing-required) for that process
 ## Solr Version Upgrades
 
+## Solr Version Upgrades
+
 The original `schema-converter/templates/{collection}/solrconfig-template.xml` and `schema-converter/templates/{collection}/managed-schema-template.xml` templates comes from the `sample_techproducts_configs` in the Solr Binary release [download](https://solr.apache.org/downloads.html). 
 
 E.g. 
@@ -81,4 +83,6 @@ E.g.
 - `solr-9.1.0/server/solr/configsets/sample_techproducts_configs/conf/managed-schema.xml`
 
 The `solrconfig-template.xml` definitely needs to be modified for each release of Solr, especially when the `<luceneMatchVersion>9.3</luceneMatchVersion>` changes. So you should diff `schema-converter/templates/{collection}/solrconfig-template.xml` and the new versions `solr-9.1.0/server/solr/configsets/sample_techproducts_configs/conf/solrconfig.xml` and pull in any relevant changes.
+
+You can also diff `solr-9.1.0/server/solr/configsets/sample_techproducts_configs/conf/managed-schema.xml` and  `schema-converter/templates/{collection}/managed-schema-template.xml` and bring in any new features, however ensure you don't overwrite the customised portions for IATI.
 
