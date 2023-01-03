@@ -129,9 +129,6 @@
     <!-- document.id -->
     <field name="iati_activities_document_id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
 
-    <!-- geospatial field -->
-    <field name="location_point_latlon" type="location_point" indexed="true" required="false" stored="true"/>
-
     <!--- Dynamic Generation Schema Start-->
     #INSERTSCHEMA#
     <!---Dynamic Generation Schema End-->
