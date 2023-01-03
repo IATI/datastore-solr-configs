@@ -114,6 +114,9 @@
     <!-- add timestamp of indexing time -->
     <field name="indexed_datetime" type="pdate" indexed="true" stored="true" default="NOW" multiValued="false"/>
 
+    <!-- Geospatial data -->
+    <field name="location_point_latlon" type="location_point" indexed="true" required="false" stored="true"/>
+
     <!-- field to hold all _narrative elements for simple search, see copyField below -->
     <field name="iati_text" type="text_general" indexed="true" stored="false" multiValued="true" />
     
@@ -499,36 +502,6 @@
          field first in an ascending sort and last in a descending sort.
     -->
 
-    <!-- IATI Custom Field Types START -->
-    <fieldtype name="string_large" class="solr.TextField" sortMissingLast="true" omitNorms="true">
-        <analyzer>
-          <tokenizer class="solr.KeywordTokenizerFactory"/>
-        </analyzer>
-    </fieldtype>
-    <!-- IATI Narrative -->
-    <fieldType name="iati_narrative" class="solr.SortableTextField" positionIncrementGap="100" multiValued="true">
-        <analyzer type="index">
-            <tokenizer name="standard"/>
-            <filter name="nGram" minGramSize="2" maxGramSize="100"/>
-            <filter name="lowercase"/>
-        </analyzer>
-        <analyzer type="query">
-            <tokenizer name="standard"/>
-            <filter name="stop" ignoreCase="true" words="stopwords.txt" />
-            <filter name="synonymGraph" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
-            <filter name="lowercase"/>
-        </analyzer>
-    </fieldType>
-    <fieldType name="non_case_sensitive" class="solr.TextField">
-        <analyzer type="index">
-            <tokenizer name="whitespace" />
-            <filter name="lowercase"/>
-        </analyzer>
-        <analyzer type="query">
-            <tokenizer name="whitespace" />
-            <filter name="lowercase"/>
-        </analyzer>
-    </fieldType>
     <!-- Geospatial data -->
     <fieldType name="location_point" class="solr.LatLonPointSpatialField" docValues="true"  multiValued="true"/>
     <!-- IATI Custom Field Types END -->
