@@ -489,7 +489,7 @@
     -->
 
     <!-- IATI Custom Field Types START -->
-    <fieldtype name="string_large" class="solr.StrField" indexed="false" stored="true" docValues="false" sortMissingLast="true" omitNorms="true"/>
+    <fieldtype name="string_large" class="solr.StrField" indexed="false" stored="true" docValues="false" sortMissingLast="true" omitNorms="true" large="true"/>
 
     <!-- Geospatial data -->
     <fieldType name="location_point" class="solr.LatLonPointSpatialField" docValues="true"  multiValued="true"/>
