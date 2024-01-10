@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ ! -d "IATIStandardSSOT" ]; then
+    echo "$0: script must be run from the 'schema-converter' dir in datastore-solr-configs repo"
+    exit 1
+fi
+
 git submodule update --init --recursive
 git submodule update --remote
 
