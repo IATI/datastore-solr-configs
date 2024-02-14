@@ -117,11 +117,17 @@
     <!-- Geospatial data -->
     <field name="location_point_latlon" type="location_point" indexed="true" required="false" stored="true"/>
 
+    <!-- simple non-tokenizing str field to hold copy of iati_identifier for exact matching -->
+    <field name="iati_identifier_exact" type="string" multiValued="false" indexed="true" required="false" stored="true"  />    
+
     <!-- field to hold all _narrative elements for simple search, see copyField below -->
     <field name="iati_text" type="text_general" indexed="true" stored="false" multiValued="true" />
     
     <!-- document.id -->
     <field name="iati_activities_document_id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+
+    <!-- document.hash -->
+    <field name="iati_activities_document_hash" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
 
     <!--- Dynamic Generation Schema Start-->
     #INSERTSCHEMA#
@@ -172,6 +178,9 @@
     <!-- Copy all narrative elements for simple search -->
     <copyField source="*_narrative" dest="iati_text"/>
     
+    <!-- Copy all iati_identifier to string field for exact matching -->
+    <copyField source="iati_identifier" dest="iati_identifier_exact"/>  
+
     <!-- field type definitions. The "name" attribute is
        just a label to be used by field definitions.  The "class"
        attribute and any other attributes determine the real
