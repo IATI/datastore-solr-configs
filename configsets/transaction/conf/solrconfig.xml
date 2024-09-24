@@ -549,7 +549,7 @@
      Circuit Breaker Section - This section consists of configurations for
      circuit breakers
      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<circuitBreaker>
+<!-- <circuitBreaker> -->
     <!-- Enable Circuit Breakers
 
      Circuit breakers are designed to allow stability and predictable query
@@ -585,7 +585,7 @@
     -->
 
   
-</circuitBreaker>
+<!-- </circuitBreaker> -->
 <!-- Request Dispatcher
 
        This section contains instructions for how the SolrDispatchFilter
