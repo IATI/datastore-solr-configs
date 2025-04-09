@@ -2,6 +2,15 @@
 
 This repo contains the [Solr Configsets](https://solr.apache.org/guide/solr/latest/configuration-guide/config-sets.html) for the IATI Datastore
 
+## Versions
+
+Certain versions of these config files only work with certain versions of Solr.
+
+| Solr  | Config Versions |
+|-------|-----------------|
+| 9.1   | 13 and below    |
+| 9.7   | 14 and above    |
+
 ## Getting started
 
 git clone <url> --recurse-submodules
